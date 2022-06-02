@@ -10,12 +10,25 @@ namespace OpenRandomMenu
     using System.Collections.Generic;
     using System.Drawing;
     using System.Windows.Forms;
+    using Microsoft.Win32;
 
     /// <summary>
     /// Description of MainForm.
     /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Gets or sets the associated icon.
+        /// </summary>
+        /// <value>The associated icon.</value>
+        private Icon associatedIcon = null;
+
+        /// <summary>
+        /// The folderize key list.
+        /// </summary>
+        private List<string> folderizeKeyList = new List<string> { @"Software\Classes\directory\shell\Open random" };
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OpenRandomMenu.MainForm"/> class.
         /// </summary>
@@ -83,6 +96,40 @@ namespace OpenRandomMenu
         private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
+        }
+
+        /// <summary>
+        /// Updates the program by registry key.
+        /// </summary>
+        private void UpdateByRegistryKey()
+        {
+            // Try to set folderize key
+            using (var folderizeKey = Registry.CurrentUser.OpenSubKey(this.folderizeKeyList[1]))
+            {
+                // Check for no returned registry key
+                if (folderizeKey == null)
+                {
+                    // Disable remove button
+                    this.removeButton.Enabled = false;
+
+                    // Enable add button
+                    this.addButton.Enabled = true;
+
+                    // Update status text
+                    this.activityToolStripStatusLabel.Text = "Inactive";
+                }
+                else
+                {
+                    // Disable add button
+                    this.addButton.Enabled = false;
+
+                    // Enable remove button
+                    this.removeButton.Enabled = true;
+
+                    // Update status text
+                    this.activityToolStripStatusLabel.Text = "Active";
+                }
+            }
         }
 
         /// <summary>

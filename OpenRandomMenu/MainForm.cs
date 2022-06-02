@@ -132,7 +132,8 @@ namespace OpenRandomMenu
         /// <param name="e">Event arguments.</param>
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open GitHub
+            Process.Start("https://github.com/publicdomain/open-random-menu");
         }
 
         /// <summary>

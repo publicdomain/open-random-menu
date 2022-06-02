@@ -39,6 +39,9 @@ namespace OpenRandomMenu
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
+
+            // Update the program by registry key
+            this.UpdateByRegistryKey();
         }
 
         /// <summary>

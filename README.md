@@ -2,8 +2,6 @@
 
 Right-click menu for Windows Explorer to open a random file from clicked folder &amp; subfolders.
 
-v0.1.0
-
 ![OpenRandomMenu_v0-1-0_menu](https://user-images.githubusercontent.com/54631779/171741843-dd5649a2-735d-4f53-b735-8341b5987d61.png)
 
 ![OpenRandomMenu_v0-1-0](https://user-images.githubusercontent.com/54631779/171741697-b70a9bcd-df7c-4655-8569-7bff10e0cbb0.png)

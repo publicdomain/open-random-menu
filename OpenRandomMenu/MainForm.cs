@@ -9,6 +9,7 @@ namespace OpenRandomMenu
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
     using Microsoft.Win32;
 
@@ -24,9 +25,9 @@ namespace OpenRandomMenu
         private Icon associatedIcon = null;
 
         /// <summary>
-        /// The folderize key list.
+        /// The openRandom key list.
         /// </summary>
-        private List<string> folderizeKeyList = new List<string> { @"Software\Classes\directory\shell\Open random" };
+        private List<string> openRandomKeyList = new List<string> { @"Software\Classes\directory\shell\Open random" };
 
 
         /// <summary>
@@ -45,7 +46,32 @@ namespace OpenRandomMenu
         /// <param name="e">Event arguments.</param>
         private void OnAddButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            try
+            {
+                // Iterate openRandom registry keys 
+                foreach (string openRandomKey in this.openRandomKeyList)
+                {
+                    // Add openRandom command to registry
+                    RegistryKey registryKey;
+                    registryKey = Registry.CurrentUser.CreateSubKey(openRandomKey);
+                    registryKey.SetValue("icon", Application.ExecutablePath);
+                    registryKey.SetValue("position", "-");
+                    registryKey = Registry.CurrentUser.CreateSubKey($"{openRandomKey}\\command");
+                    registryKey.SetValue(string.Empty, $"{Path.Combine(Application.StartupPath, Application.ExecutablePath)} \"%1\"");
+                    registryKey.Close();
+                }
+
+                // Update the program by registry key
+                this.UpdateByRegistryKey();
+
+                // Notify user
+                MessageBox.Show($"IOpenRandom context menu added!{Environment.NewLine}{Environment.NewLine}Right-click in Windows Explorer to use it.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Notify user
+                MessageBox.Show($"Error when adding openRandom context menu to registry.{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -103,11 +129,11 @@ namespace OpenRandomMenu
         /// </summary>
         private void UpdateByRegistryKey()
         {
-            // Try to set folderize key
-            using (var folderizeKey = Registry.CurrentUser.OpenSubKey(this.folderizeKeyList[1]))
+            // Try to set openRandom key
+            using (var openRandomKey = Registry.CurrentUser.OpenSubKey(this.openRandomKeyList[1]))
             {
                 // Check for no returned registry key
-                if (folderizeKey == null)
+                if (openRandomKey == null)
                 {
                     // Disable remove button
                     this.removeButton.Enabled = false;

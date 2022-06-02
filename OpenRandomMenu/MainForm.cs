@@ -29,7 +29,6 @@ namespace OpenRandomMenu
         /// </summary>
         private List<string> openRandomKeyList = new List<string> { @"Software\Classes\directory\shell\Open random" };
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OpenRandomMenu.MainForm"/> class.
         /// </summary>
@@ -48,7 +47,7 @@ namespace OpenRandomMenu
         {
             try
             {
-                // Iterate openRandom registry keys 
+                // Iterate openRandom registry keys
                 foreach (string openRandomKey in this.openRandomKeyList)
                 {
                     // Add openRandom command to registry
@@ -65,7 +64,7 @@ namespace OpenRandomMenu
                 this.UpdateByRegistryKey();
 
                 // Notify user
-                MessageBox.Show($"IOpenRandom context menu added!{Environment.NewLine}{Environment.NewLine}Right-click in Windows Explorer to use it.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Open random context menu added!{Environment.NewLine}{Environment.NewLine}Right-click in Windows Explorer to use it.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -81,7 +80,26 @@ namespace OpenRandomMenu
         /// <param name="e">Event arguments.</param>
         private void OnRemoveButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            try
+            {
+                // Iterate openRandom registry keys 
+                foreach (var openRandomKey in this.openRandomKeyList)
+                {
+                    // Remove openRandom command to registry
+                    Registry.CurrentUser.DeleteSubKeyTree(openRandomKey);
+                }
+
+                // Update the program by registry key
+                this.UpdateByRegistryKey();
+
+                // Notify user
+                MessageBox.Show("Open random context menu removed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Notify user
+                MessageBox.Show($"Error when removing open random command from registry.{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>

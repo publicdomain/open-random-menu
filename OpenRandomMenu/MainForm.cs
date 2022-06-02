@@ -8,6 +8,7 @@ namespace OpenRandomMenu
     // Directives
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
@@ -109,7 +110,8 @@ namespace OpenRandomMenu
         /// <param name="e">Event arguments.</param>
         private void OnFreeReleasesPublicDomainisToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open our website
+            Process.Start("https://publicdomain.is");
         }
 
         /// <summary>

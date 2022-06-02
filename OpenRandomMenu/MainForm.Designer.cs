@@ -196,6 +196,7 @@ namespace OpenRandomMenu
 			// 
 			// MainForm
 			// 
+			this.AcceptButton = this.addButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(246, 145);
@@ -204,6 +205,7 @@ namespace OpenRandomMenu
 			this.Controls.Add(this.mainStatusStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "OpenRandomMenu";
 			this.mainMenuStrip.ResumeLayout(false);
 			this.mainMenuStrip.PerformLayout();

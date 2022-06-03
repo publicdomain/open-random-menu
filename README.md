@@ -8,7 +8,6 @@ Right-click menu for Windows Explorer to open a random file from clicked folder 
 
 ![OpenRandomMenu_v0-1-0_active](https://user-images.githubusercontent.com/54631779/171741716-a90a6bf1-3cc5-4dab-9eca-f85f9da3034b.png)
 
-
 Inspired by **Coeluh** from [donationcoder.com](https://www.donationcoder.com).
 
 Original thread: [DONE: Random (real random) file from folder and subfolders](https://www.donationcoder.com/forum/index.php?topic=17316.0)
